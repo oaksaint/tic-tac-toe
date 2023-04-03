@@ -25,6 +25,15 @@ function xOrCircle() {
   return teamChoice;
 }
 
+// Ask player to pick a spot
+function pickSpot() {
+  let row = prompt('Select the row:');
+  let column = prompt('Select the column:');
+  row--;
+  column--;
+  return { row: row, column: column };
+}
+
 // Populates the board spot chosen by the player, refuses to do so if the spot
 // is already taken
 function populateBoard(row, column) {
@@ -39,10 +48,7 @@ function populateBoard(row, column) {
 // selecting the row/column that they would like to put their symbol at
 function playRound() {
   teamChoice = xOrCircle();
-  let row = prompt('Select the row:');
-  let column = prompt('Select the column:');
-  row--;
-  column--;
+  let { row, column } = pickSpot();
   populateBoard(row, column);
   displayBoard();
 }
