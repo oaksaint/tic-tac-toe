@@ -16,7 +16,7 @@ function displayBoard() {
 }
 
 // Ask if the player will be X or circle
-// Blocks invalid inputs by running the loop again
+// Block invalid inputs by running the loop again
 function xOrCircle() {
   let teamChoice;
   while (teamChoice !== 'x' && teamChoice !== 'o') {
@@ -26,15 +26,25 @@ function xOrCircle() {
 }
 
 // Ask player to pick a spot
+// Block invalid inputs by running the loop again
 function pickSpot() {
-  let row = prompt('Select the row:');
-  let column = prompt('Select the column:');
+  let row = 0;
+  let column = 0;
+
+  while (row < 1 || row > 3) {
+    row = prompt('Select the row:');
+  }
+
+  while (column < 1 || column > 3) {
+    column = prompt('Select the column:');
+  }
+
   row--;
   column--;
   return { row: row, column: column };
 }
 
-// Populates the board spot chosen by the player, refuses to do so if the spot
+// Populate the board spot chosen by the player, refuse to do so if the spot
 // is already taken
 function populateBoard(row, column) {
   if (board[row][column] !== '-') {
