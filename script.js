@@ -16,9 +16,12 @@ function displayBoard() {
 }
 
 // Ask if the player will be X or circle
-// TODO implement an automatic selection afterwards for player 2
+// Blocks invalid inputs by running the loop again
 function xOrCircle() {
-  let teamChoice = prompt('Do you want to play as "o" or "x"?');
+  let teamChoice;
+  while (teamChoice !== 'x' && teamChoice !== 'o') {
+    teamChoice = prompt('Do you want to play as "o" or "x"?');
+  }
   return teamChoice;
 }
 
