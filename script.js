@@ -18,8 +18,18 @@ function displayBoard() {
 // Ask if the player will be X or circle
 // TODO implement an automatic selection afterwards for player 2
 function xOrCircle() {
-  let teamChoice = prompt('Do you want to play as O or X?');
+  let teamChoice = prompt('Do you want to play as "o" or "x"?');
   return teamChoice;
+}
+
+// Populates the board spot chosen by the player, refuses to do so if the spot
+// is already taken
+function populateBoard(row, column) {
+  if (board[row][column] !== '-') {
+    alert('Spot already taken! Choose again!');
+  } else {
+    board[row][column] = teamChoice;
+  }
 }
 
 // Play round, by asking the player what will be their team selection and then
@@ -30,13 +40,7 @@ function playRound() {
   let column = prompt('Select the column:');
   row--;
   column--;
-
-  if (board[row][column] !== '-') {
-    alert('Spot already taken! Choose again!');
-  } else {
-    board[row][column] = teamChoice;
-  }
-
+  populateBoard(row, column);
   displayBoard();
 }
 
