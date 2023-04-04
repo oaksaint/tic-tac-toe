@@ -6,6 +6,9 @@ let board = [
 ];
 let gameOver = false;
 let gameBoard = { matrix: board };
+let playerOne;
+let playerTwo;
+let playerTurn;
 
 // Display the matrix grid row by row with a new line afterwards
 function displayBoard() {
@@ -15,14 +18,27 @@ function displayBoard() {
   console.log('\n');
 }
 
-// Ask if the player will be X or circle
+// Ask if the player 1 will be X or circle
 // Block invalid inputs by running the loop again
-function xOrCircle() {
-  let teamChoice;
-  while (teamChoice !== 'x' && teamChoice !== 'o') {
-    teamChoice = prompt('Do you want to play as "o" or "x"?');
+function playerOneChoose() {
+  while (playerOne !== 'x' && playerOne !== 'o') {
+    playerOne = prompt('Player 1, do you want to play as "o" or "x"?');
   }
-  return teamChoice;
+}
+
+// Automatically assign the player 2 selection based on player 1 choice
+function playerTwoAssign() {
+  if (playerOne === 'x') {
+    playerTwo = 'o';
+  } else {
+    playerTwo = 'x';
+  }
+}
+
+// Switches turn depending on the playerTurn variable, if "x" then it'll switch
+// to "o"
+function switchTurn() {
+  playerTurn === playerOne ? (playerTurn = playerTwo) : (playerTurn = playerOne);
 }
 
 // Ask player to pick a spot
@@ -32,11 +48,11 @@ function pickSpot() {
   let column = 0;
 
   while (row < 1 || row > 3) {
-    row = prompt('Select the row:');
+    row = prompt(`Player "${playerTurn}", select the row:`);
   }
 
   while (column < 1 || column > 3) {
-    column = prompt('Select the column:');
+    column = prompt(`Player "${playerTurn}", select the column:`);
   }
 
   row--;
@@ -44,13 +60,13 @@ function pickSpot() {
   return { row: row, column: column };
 }
 
-// Populate the board spot chosen by the player, refuse to do so if the spot
-// is already taken
+// Populate the board spot chosen by the current player, refuse to do so if the
+// spot is already taken
 function populateBoard(row, column) {
   if (board[row][column] !== '-') {
     alert('Spot already taken! Choose again!');
   } else {
-    board[row][column] = teamChoice;
+    board[row][column] = playerTurn;
   }
 }
 
@@ -145,18 +161,22 @@ function checkWin() {
   }
 }
 
-// Play round, by asking the player what will be their team selection and then
-// selecting the row/column that they would like to put their symbol at
+// Play a round, start by switching the turns, the allow the current player to
+// pick a row and column, populates the board based on their choice, displays
+// the board and check for win conditions
 function playRound() {
-  teamChoice = xOrCircle();
+  switchTurn();
   let { row, column } = pickSpot();
   populateBoard(row, column);
   displayBoard();
   checkWin();
 }
 
+// Runs the two player choice functions before starting the round loop
+playerOneChoose();
+playerTwoAssign();
+
 // Runs the playRound function on a loop
-// TODO put this to run inside a function
 while (gameOver === false) {
   playRound();
 }
