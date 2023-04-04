@@ -54,9 +54,83 @@ function populateBoard(row, column) {
   }
 }
 
+// Check for the winner depending on the 8 possible victory conditions
+// So much for DRY
+function checkWin() {
+  switch (true) {
+    case board[0][0] === board[0][1] && board[0][1] === board[0][2]:
+      if (board[0][0] === 'o') {
+        console.log('Circle wins!');
+      } else if (board[0][0] === 'x') {
+        console.log('X wins!');
+      }
+      break;
+
+    case board[1][0] === board[1][1] && board[1][1] === board[1][2]:
+      if (board[1][0] === 'o') {
+        console.log('Circle wins!');
+      } else if (board[1][0] === 'x') {
+        console.log('X wins!');
+      }
+      break;
+
+    case board[2][0] === board[2][1] && board[2][1] === board[2][2]:
+      if (board[2][0] === 'o') {
+        console.log('Circle wins!');
+      } else if (board[2][0] === 'x') {
+        console.log('X wins!');
+      }
+      break;
+
+    case board[0][0] === board[1][0] && board[1][0] === board[2][0]:
+      if (board[0][0] === 'o') {
+        console.log('Circle wins!');
+      } else if (board[0][0] === 'x') {
+        console.log('X wins!');
+      }
+      break;
+
+    case board[0][1] === board[1][1] && board[1][1] === board[2][1]:
+      if (board[0][1] === 'o') {
+        console.log('Circle wins!');
+      } else if (board[0][1] === 'x') {
+        console.log('X wins!');
+      }
+      break;
+
+    case board[0][2] === board[1][2] && board[1][2] === board[2][2]:
+      if (board[0][2] === 'o') {
+        console.log('Circle wins!');
+      } else if (board[0][2] === 'x') {
+        console.log('X wins!');
+      }
+      break;
+
+    case board[0][0] === board[1][1] && board[1][1] === board[2][2]:
+      if (board[0][0] === 'o') {
+        console.log('Circle wins!');
+      } else if (board[0][0] === 'x') {
+        console.log('X wins!');
+      }
+      break;
+
+    case board[0][2] === board[1][1] && board[1][1] === board[2][0]:
+      if (board[0][2] === 'o') {
+        console.log('Circle wins!');
+      } else if (board[0][2] === 'x') {
+        console.log('X wins!');
+      }
+      break;
+
+    default:
+      break;
+  }
+}
+
 // Play round, by asking the player what will be their team selection and then
 // selecting the row/column that they would like to put their symbol at
 function playRound() {
+  checkWin();
   teamChoice = xOrCircle();
   let { row, column } = pickSpot();
   populateBoard(row, column);
