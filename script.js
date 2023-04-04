@@ -54,7 +54,8 @@ function populateBoard(row, column) {
   }
 }
 
-// Check for the winner depending on the 8 possible victory conditions
+// Check for the winner depending on the 8 possible victory conditions, end the
+// game if victory is met for either side
 // So much for DRY
 function checkWin() {
   switch (true) {
