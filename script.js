@@ -156,6 +156,11 @@ function checkWin() {
       }
       break;
 
+    case board[0].includes('-') === false && board[1].includes('-') === false && board[2].includes('-') === false:
+      console.log("It's a draw!");
+      gameOver = true;
+      break;
+
     default:
       break;
   }
